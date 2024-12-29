@@ -24,7 +24,6 @@ export default function signInPage() {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      
         <View style={styles.container}>
         <View style={styles.externalCircle} />
         <View style={styles.innerCircle} />

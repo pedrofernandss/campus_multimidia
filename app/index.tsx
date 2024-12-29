@@ -7,7 +7,7 @@ import NewsList from "@/components/NewsList";
 import { StyleSheet, Dimensions, SafeAreaView } from 'react-native';
 
 export default function App() {
-  return (
+  return (  
     <SafeAreaView style={styles.safeAreaContainer}>
       <StatusBar backgroundColor={standard.colors.primaryWhite} style='dark' />
       <Header/>
