@@ -25,29 +25,6 @@ const Trendings: React.FC = () => {
         loadTags();
     }, []);
 
-    useEffect(() => {
-        const totalWidth = tags.length * 150;
-        const startAnimation = () => {
-            if (totalWidth > 0) {
-                translateX.setValue(0);
-                Animated.timing(translateX, {
-                    toValue: -totalWidth+500,
-                    duration: 13000,
-                    useNativeDriver: true,
-                }).start(() => {
-                    translateX.setValue(0);
-                    startAnimation();
-                });
-            }
-        };
-
-        startAnimation();
-
-        return () => {
-            translateX.stopAnimation();
-        };
-    }, [translateX, tags]);
-
     return (
         <View>
             <View style={styles.innerContainer}>
@@ -57,17 +34,15 @@ const Trendings: React.FC = () => {
                     resizeMode="contain"           
                 />
                 <Text style={styles.labelText}>Em alta</Text>
-                <View style={styles.overflowTransformation}>
-                    <Animated.View style={[{ transform: [{ translateX }], width: tags.length*150}, styles.animatedTrendingText]}>
-                        <FlatList
-                            data={tags}
-                            horizontal
-                            keyExtractor={(tag) => tag.id.toString()}
-                            renderItem={({ item }) => <TrendingItem tag={item}/> }
-                            scrollEnabled={false}
-                            showsHorizontalScrollIndicator={false}
-                        />
-                    </Animated.View>
+                <View style={styles.trendingTextList}>
+                    <FlatList
+                        data={tags}
+                        horizontal={true}
+                        keyExtractor={(tag) => tag.id.toString()}
+                        renderItem={({ item }) => <TrendingItem tag={item}/> }
+                        scrollEnabled={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
                 </View>
             </View>
         </View>
@@ -90,12 +65,10 @@ const styles = StyleSheet.create({
         fontFamily: standard.fonts.semiBold, 
         color: 'black',
     },
-    overflowTransformation:{
-        overflow: 'hidden'
-    },
-    animatedTrendingText:{
+    trendingTextList:{
         flexDirection: 'row',
-    },
+        overflow: 'hidden'
+    }
 });
 
 export default Trendings;
